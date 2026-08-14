@@ -1,0 +1,11 @@
+# DeepSeek Harness bundle layer for the Genshin skin. When a profile lists this
+# bundle, this patch inserts the skin's plugin row. The row references the
+# package by name so Node resolution finds the installed code; because the
+# package.json declares `dsh.client` (platform: web), the host client-module
+# scanner discovers the browser half and serves it to the Web UI.
+#
+# Placed as an insert at the end of the composition so the skin's token
+# override layer applies over the stock theme.
+- insert:
+    - id: genshin-skin
+      name: dsh-genshin-skin

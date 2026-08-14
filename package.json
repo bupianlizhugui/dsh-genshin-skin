@@ -1,0 +1,51 @@
+{
+  "name": "dsh-genshin-skin",
+  "version": "0.1.0",
+  "description": "A Genshin Impact (Snezhnaya / 至冬) presentation skin for the DeepSeek Harness Web UI: recolors the theme tokens and adds a wallpaper background. Presentation only — no session, model, tool, or network behavior.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "skin",
+    "theme",
+    "genshin"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "build:wallpaper": "node scripts/build-wallpaper.mjs",
+    "build": "npm run build:wallpaper && tsdown",
+    "prepare": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.30.0",
+    "tsdown": "^0.15.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

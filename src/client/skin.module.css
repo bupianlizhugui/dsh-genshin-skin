@@ -1,0 +1,25 @@
+/*
+ * Genshin decorative accent. Injected as a <style data-plugin> tag by the
+ * client bundle; removed by the loader on unload. Selectors are :global()
+ * because the skin decorates document-level surfaces. Presentation only.
+ */
+
+/* A gentle gilded glow on the left edge, evoking a Teyvat map panel border. */
+:global(body)::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(226, 188, 120, 0) 0%,
+    rgba(226, 188, 120, 0.55) 22%,
+    rgba(226, 188, 120, 0.35) 78%,
+    rgba(226, 188, 120, 0) 100%
+  );
+  box-shadow: 0 0 18px rgba(226, 188, 120, 0.4);
+}

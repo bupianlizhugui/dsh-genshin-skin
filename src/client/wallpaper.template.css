@@ -1,0 +1,42 @@
+/*
+ * Wallpaper layer TEMPLATE. Do not import this file directly and do not edit
+ * the generated output by hand.
+ *
+ * `pnpm build` runs scripts/build-wallpaper.mjs, which reads the image at
+ * src/client/assets/genshin-snezhnaya.jpeg, inlines it as a base64 data: URI,
+ * and writes the compiled src/client/wallpaper.module.css that the client
+ * entry imports. Inlining follows the DeepSeek Harness convention for client
+ * bundle image assets (a client bundle has no separate HTTP route for files).
+ *
+ * To use your own wallpaper: replace the image in src/client/assets/ (keep the
+ * filename, or update WALLPAPER_ASSET in the build script) and rebuild.
+ *
+ * The wallpaper sits on a fixed, pointer-transparent pseudo-element behind the
+ * app shell, with a scheme-aware scrim so foreground text stays legible.
+ */
+:global(body)::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(18, 22, 34, 0.55), rgba(18, 22, 34, 0.72)),
+    url("__WALLPAPER_DATA_URI__");
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+/* Light scheme wants a lighter scrim so the parchment tokens still read warm. */
+:global(body:not([data-ds-dark-theme]))::before {
+  background-image:
+    linear-gradient(rgba(247, 244, 236, 0.62), rgba(247, 244, 236, 0.78)),
+    url("__WALLPAPER_DATA_URI__");
+}
+
+/* Keep the real application shell above the wallpaper. */
+:global(#root) {
+  position: relative;
+  z-index: 1;
+}
